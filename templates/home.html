@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <p class="fs-1">Hi {{ user.username }}!</p>
+        <div class="overlay"></div>
+        <div class="text">
+            <div class="wrapper">
+                <div id="Q" class="letter">Q</div>
+                <div class="shadow">Q</div>
+            </div>
+            <div class="wrapper">
+                <div id="U" class="letter">U</div>
+                <div class="shadow">U</div>
+            </div>
+            <div class="wrapper">
+                <div id="I" class="letter">I</div>
+                <div class="shadow">I</div>
+            </div>
+            <div class="wrapper">
+                <div id="Z" class="letter">Z</div>
+                <div class="shadow">Z</div>
+            </div>
+        </div>
+        <div style="text-align: right">
+            <img style="width: 500px; height: auto; margin-right: 20px;" src="{% static 'silhouette-4948938_640.png' %}" class="figure-img" alt="...">
+        </div>
+        <a href="{% url 'logout' %}" type="button" class="btn btn-dark">Log Out</a>
+    {% else %}
+        <p class="fs-1">You are not logged in</p>
+        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Log In</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Log In</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action={% url 'login' %}>
+                            <div class="form-group row">
+                                <div class="col-xs-2">
+                                    <label for="username">
+                                        Email/Username
+                                        <input id="username" name="username" type="text"/>
+                                    </label>
+                                    {{ form.username }}
+                                </div>
+                                <div class="col-xs-3 m-5">
+                                    <label for="password" >
+                                        Password
+                                        <input id="password" name="password" type="text"/>
+                                    </label>
+                                    {{ form.password }}
+                                </div>
+                            </div>
+                            {% csrf_token %}
+                            <div class="container text-center">
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Log In</button>
+                                    <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign up</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
