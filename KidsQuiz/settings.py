@@ -133,3 +133,6 @@ LOGOUT_REDIRECT_URL = 'home'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+MEDIA_URL = ""
+MEDIA_ROOT = ""

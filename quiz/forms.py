@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from .models import CustomUser
+from django.forms import ModelForm
+
+from .models import CustomUser, QuizModel
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -10,9 +12,12 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm, AuthenticationForm):
-    username = forms.CharField(label='Email / Username')
-
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
 
+
+class Quizform(ModelForm):
+    class Meta:
+        model = QuizModel
+        fields = "__all__"
